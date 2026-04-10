@@ -1,85 +1,233 @@
 <!doctype html>
 <html lang="si">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>A/L ICT — සංඛ්‍යා/Unicode පරිවර්ථක</title>
-  <style>
-    :root{--bg:#f6f8fb;--card:#fff;--accent:#0b6efd;--muted:#6b7280}
-    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:#111}
-    .wrap{max-width:920px;margin:36px auto;padding:20px}
-    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 20px rgba(20,30,60,0.06)}
-    header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-    h1{font-size:20px;margin:0}
-    p.lead{margin:6px 0 18px;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-    input[type=text],select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px}
-    textarea{min-height:120px;resize:vertical}
-    .actions{display:flex;gap:8px;margin-top:10px}
-    button{background:var(--accent);color:white;border:0;padding:10px 12px;border-radius:8px;cursor:pointer}
-    button.secondary{background:#fff;color:var(--accent);border:1px solid #dbe7ff}
-    .output{background:#f8fafc;padding:12px;border-radius:8px;border:1px dashed #e6eefc;white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace}
-    .foot{margin-top:12px;color:var(--muted);font-size:13px}
-    @media(max-width:760px){.grid{grid-template-columns:1fr}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<title>A/L ICT — Number & Unicode Converter</title>
+
+<style>
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --accent1:#6C63FF;
+  --accent2:#00b4ff;
+  --text:#111;
+  --muted:#6b7280;
+}
+
+html,body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* container */
+.wrap{
+  max-width:950px;
+  margin:auto;
+  padding:25px 16px;
+}
+
+/* card */
+.card{
+  background:var(--card);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.08);
+  backdrop-filter:blur(10px);
+}
+
+/* header */
+h1{
+  text-align:center;
+  font-size:26px;
+  margin-bottom:10px;
+}
+
+.lead{
+  text-align:center;
+  color:var(--muted);
+  margin-bottom:22px;
+}
+
+/* grid */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+@media(max-width:780px){
+  .grid{grid-template-columns:1fr}
+}
+
+/* inputs */
+label{
+  font-size:13px;
+  color:var(--muted);
+}
+
+input,select{
+  width:100%;
+  padding:11px;
+  border-radius:10px;
+  border:1px solid #e6e9ef;
+  margin-top:6px;
+  font-size:14px;
+}
+
+/* output box */
+.output{
+  background:#f1f5ff;
+  padding:14px;
+  border-radius:12px;
+  border:1px dashed #dbe4ff;
+  min-height:120px;
+  font-family:monospace;
+  white-space:pre-wrap;
+}
+
+/* buttons */
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+
+button{
+  border:0;
+  padding:11px 16px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:600;
+  color:white;
+  background:linear-gradient(45deg,var(--accent1),var(--accent2));
+  box-shadow:0 6px 15px rgba(0,0,0,0.15);
+  transition:.3s;
+}
+
+button:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 22px rgba(0,0,0,0.2);
+}
+
+.secondary{
+  background:#eef2ff;
+  color:#4f46e5;
+}
+
+/* social icons */
+.social-bar{
+  display:flex;
+  justify-content:center;
+  gap:22px;
+  margin-top:30px;
+}
+
+.social-icon{
+  width:54px;height:54px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  background:#f1f5f9;
+  color:#555;
+  transition:.3s;
+  animation:floatIcon 3s ease-in-out infinite;
+}
+
+.youtube:hover{background:#ff0000;color:white}
+.facebook:hover{background:#1877F2;color:white}
+.tiktok:hover{background:#000;color:white}
+.instagram:hover{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);color:white}
+.telegram:hover{background:#0088cc;color:white}
+
+@keyframes floatIcon{
+0%{transform:translateY(0)}
+50%{transform:translateY(-6px)}
+100%{transform:translateY(0)}
+}
+
+/* footer */
+.footer{
+  text-align:center;
+  margin-top:28px;
+  color:#9aa0aa;
+  font-size:14px;
+}
+</style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="card">
-      <header>
-        <h1>A/L ICT — Number & Unicode Converter</h1>
-      </header>
-      <p class="lead">මෙම උපාංගය තුළින් ඔබට සංඛ්‍යා (binary/decimal/hex/octal) හා Unicode (text → code points / code points → text) අතර පරිවර්තනය සිදු කළ හැක.</p>
 
-      <div class="grid">
-        <div>
-          <label for="mode">Mode (කාර්යය)</label>
-          <select id="mode">
-            <option value="base">Number base ↔ Number base</option>
-            <option value="text-to-cp">Text → Unicode code points (hex)</option>
-            <option value="cp-to-text">Unicode code points → Text</option>
-          </select>
+<div class="wrap">
+<div class="card">
 
-          <div id="base-options" style="margin-top:12px">
-            <label for="fromBase">From</label>
-            <select id="fromBase">
-              <option value="2">Binary (base 2)</option>
-              <option value="8">Octal (base 8)</option>
-              <option value="10" selected>Decimal (base 10)</option>
-              <option value="16">Hexadecimal (base 16)</option>
-            </select>
+<h1>Number & Unicode Converter</h1>
+<p class="lead">Binary • Decimal • Hex • Unicode converter tool</p>
 
-            <label for="toBase" style="margin-top:10px">To</label>
-            <select id="toBase">
-              <option value="2">Binary (base 2)</option>
-              <option value="8">Octal (base 8)</option>
-              <option value="10" selected>Decimal (base 10)</option>
-              <option value="16">Hexadecimal (base 16)</option>
-            </select>
-          </div>
+<div class="grid">
+<div>
+<label>Mode</label>
+<select id="mode">
+<option value="base">Number Base Converter</option>
+<option value="text-to-cp">Text → Unicode</option>
+<option value="cp-to-text">Unicode → Text</option>
+</select>
 
-          <label for="inputValue" style="margin-top:12px">Input (ආදානය)</label>
-          <input id="inputValue" type="text" placeholder="e.g. 1010  or  255  or  අපි සල" />
+<div id="base-options">
+<label>From Base</label>
+<select id="fromBase">
+<option value="2">Binary</option>
+<option value="8">Octal</option>
+<option value="10" selected>Decimal</option>
+<option value="16">Hex</option>
+</select>
 
-          <div class="actions">
-            <button id="convertBtn">Convert</button>
-            <button class="secondary" id="clearBtn">Clear</button>
-            <button class="secondary" id="copyOut">Copy Output</button>
-          </div>
-        </div>
+<label>To Base</label>
+<select id="toBase">
+<option value="2">Binary</option>
+<option value="8">Octal</option>
+<option value="10" selected>Decimal</option>
+<option value="16">Hex</option>
+</select>
+</div>
 
-        <div>
-          <label>Output (ප්රතිඵල)</label>
-          <div id="output" class="output">ඔබගේ ප්‍රතිඵල මෙහි පෙන්වනු ඇත.</div>
+<label>Input</label>
+<input id="inputValue" placeholder="Enter value">
 
-          <div class="foot">Tips: Text input supports Sinhala and other Unicode characters. For code-point input, separate values with spaces or commas, e.g. <code>0x0DB1 0x0DC0</code> or <code>0DB1 0DC0</code>.</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="actions">
+<button id="convertBtn">Convert</button>
+<button class="secondary" id="clearBtn">Clear</button>
+<button class="secondary" id="copyOut">Copy</button>
+</div>
+</div>
 
-  <script>
+<div>
+<label>Output</label>
+<div id="output" class="output"></div>
+</div>
+</div>
+
+<!-- social -->
+<div class="social-bar">
+<a href="https://youtube.com/@jehanranepura" target="_blank" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+<a href="https://facebook.com" target="_blank" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+<a href="https://tiktok.com" target="_blank" class="social-icon tiktok"><i class="fab fa-tiktok"></i></a>
+<a href="https://instagram.com/jehanranepura" target="_blank" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+<a href="https://t.me/jehan_rp" target="_blank" class="social-icon telegram"><i class="fab fa-telegram-plane"></i></a>
+</div>
+
+<div class="footer">Created by Jehan Ranepura</div>
+
+</div>
+</div>
+
+<script>
     // Utility helpers
     const el = id => document.getElementById(id);
     const mode = el('mode');
@@ -181,5 +329,6 @@
     // initialize
     mode.dispatchEvent(new Event('change'));
   </script>
+
 </body>
 </html>
